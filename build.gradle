@@ -1,0 +1,70 @@
+group 'org.github.liketechnik'
+version '1.0'
+
+buildscript {
+    ext.kotlin_version = '1.1.2-2'
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.13"
+    }
+}
+
+apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'kotlin'
+apply plugin: 'idea'
+apply plugin: 'distribution'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlin_version"
+}
+
+sourceCompatibility = 1.8
+
+distributions {
+    main {
+        contents {
+            from { 'README.md' }
+            from { 'LICENSE' }
+            from { 'CHANGELOG.md' }
+        }
+    }
+}
+
+task dokkaJavadocDev(type: org.jetbrains.dokka.gradle.DokkaTask) {
+    outputFormat = 'html'
+    outputDirectory = "$rootProject.projectDir/docs/development"
+
+    jdkVersion = 8
+
+    skipEmptyPackages = false
+
+    linkMapping {
+        dir = "src/main/"
+        url = "https://github.com/liketechnik/cli-parser/blob/development/src/main"
+        suffix = "#L"
+    }
+}
+
+task dokkaJavadocStable(type: org.jetbrains.dokka.gradle.DokkaTask) {
+    outputFormat = 'html'
+    outputDirectory = "$rootProject.projectDir/docs/stable"
+
+    jdkVersion = 8
+
+    skipEmptyPackages = false
+
+    linkMapping {
+        dir = "src/main/"
+        url = "https://github.com/liketechnik/infoDisplay/blob/stable/src/main"
+        suffix = "#L"
+    }
+}
