@@ -35,7 +35,9 @@ package org.github.liketechnik
  * This class represents a command line parameter.
  *
  * [name] and [shortName] are used to identify the passed arguments and match their values to the correct parameters.
+ * [defaultValue] must have the same type as [type] is stating; it is used when the parameter is not specified on the cli.
  * [type] defines which (java/kotlin) data type the value of the parameter should have.
+ * [id] identifies the parameter amongst others in a parser and must be unique
  *
  * @author Florian Warzecha
  * @version 1.0
@@ -54,11 +56,22 @@ abstract class Parameter {
      */
     abstract val shortName: String
     /**
+     * When overriding please choose an appropriate type for the default value, in most cases it must be the same as
+     * specified by [type]. The value of this property is used when the parameter was not found on the cli by the parser
+     * or it was unable to convert it to the [type] requested.
+     */
+    abstract val defaultValue: kotlin.Any
+    /**
      * The data type of the [parameter's][Parameter] value.
      * @see ArgumentTypes
      */
     abstract val type: ArgumentTypes
+    /**
+     * A unique id for identifying the parameter amongst others.
+     */
+    abstract val id: String
 }
+
 
 /**
  * The possible data types a [parameter's][Parameter] value can have.
