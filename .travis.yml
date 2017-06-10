@@ -1,5 +1,5 @@
 language: java
-script: "./gradlew :distZip :distTar"
+script: "./gradlew :test :genLib"
 jdk:
 - oraclejdk8
 before_cache:
