@@ -28,7 +28,7 @@ package com.github.liketechnik
  * value's data type (e. g. [getStringArgumentValue] for [Strings][String]).
  *
  * @author Florian Warzecha
- * @version 1.0
+ * @version 1.1
  * @since 1.0-dev
  * @date 07 of June 2017
  * @param arguments The arguments to parse (usually from cli).
@@ -43,6 +43,7 @@ class Parser @JvmOverloads constructor(val arguments: Array<String>, val argumen
                                        val parameters: Array<Parameter>) {
 
     private val strValues: MutableMap<String, String> = mutableMapOf<String, String>()
+    private val intValues: MutableMap<String, Int> = mutableMapOf<String, Int>()
 
     /**
      * Parses the passed arguments for the values for the specified parameters.
@@ -56,7 +57,11 @@ class Parser @JvmOverloads constructor(val arguments: Array<String>, val argumen
                         strValues.putIfAbsent(parameter.id, parameter.defaultValue as String)
                     }
                 } else if (parameter.type == ArgumentTypes.INT) {
-                    TODO("No parse method for integers available yet.")
+                    try {
+                        intValues.putIfAbsent(parameter.id, parseIntArgument(parameter))
+                    } catch (e: ParserException) {
+                        intValues.putIfAbsent(parameter.id, parameter.defaultValue as Int)
+                    }
                 }
         }
     }
@@ -76,6 +81,20 @@ class Parser @JvmOverloads constructor(val arguments: Array<String>, val argumen
     }
 
     /**
+     * Returns the parsed value for the specified parameter.
+     * @param id The id of the parameter whose value is returned.
+     * @return The ([Int]) value of the parameter.
+     */
+    fun getIntArgumentValue(id: String): Int {
+        val value: Int? = intValues[id]
+        if (value is Int) {
+            return value
+        } else {
+            return getParameterById(id).defaultValue as Int
+        }
+    }
+
+    /**
      * Parses the [cli arguments][arguments] for the value of the specified [parameter].
      *
      * If it finds the long form of the parameter, the value of this is returned. If that is not
@@ -85,10 +104,6 @@ class Parser @JvmOverloads constructor(val arguments: Array<String>, val argumen
      */
     @Throws(ParserException::class)
     private fun parseStringArgument(parameter: Parameter): String {
-        if (parameter.type != ArgumentTypes.STRING) {
-            throw IllegalArgumentException("This method is ONLY for parsing strings. Use different method for parsing other" +
-                    "data types.")
-        }
         val value: String
 
         for (i in this.arguments.indices) {
@@ -108,7 +123,21 @@ class Parser @JvmOverloads constructor(val arguments: Array<String>, val argumen
             }
             return value
         }
-        return parameter.defaultValue as String
+        return parameter.defaultValue.toString()
+    }
+
+    /**
+     * Tries to convert the string value for the parameter found by [parseStringArgument] to an [Int]. If this fails
+     * it uses the default value from [parameter].
+     * @param parameter The parameter whose int value from cli is parsed.
+     * @see parseStringArgument
+     */
+    private fun parseIntArgument(parameter: Parameter): Int {
+        try {
+            return parseStringArgument(parameter).replace(" ", "").toInt()
+        } catch (e: NumberFormatException) {
+            return parameter.defaultValue as Int
+        }
     }
 
     /**

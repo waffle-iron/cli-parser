@@ -26,7 +26,7 @@ import org.junit.Assert.*
 /**
  * @author Florian Warzecha
  * *
- * @version 1.0
+ * @version 1.1
  * *
  * @date 07 of June 2017
  */
@@ -47,11 +47,39 @@ class ParserTest {
                 StringTestParam().defaultValue)
     }
 
+    @Test
+    fun parseIntArguments() {
+        val params: Array<Parameter> = arrayOf(IntTestParam())
+
+        val longFormValue: String = "20"
+        val longFormArgs: Array<String> = arrayOf("--test=$longFormValue", "10", "--test2=100")
+        val shortFormValue1: String = "30"
+        val shortFormValue2: String = "000"
+        val shortFormArgs: Array<String> = arrayOf<String>("-t", shortFormValue1, shortFormValue2, "--test4=40")
+
+        assertEquals(longFormValue.toInt(),
+                Parser(longFormArgs, parameters = params).getIntArgumentValue(IntTestParam().id))
+        assertEquals((shortFormValue1 + shortFormValue2).toInt(),
+                Parser(shortFormArgs, parameters = params).getIntArgumentValue(IntTestParam().id))
+        assertEquals(IntTestParam().defaultValue,
+                Parser(arrayOf(), parameters = params).getIntArgumentValue(IntTestParam().id))
+        assertEquals(IntTestParam().defaultValue,
+                Parser(arrayOf("--test=hallo"), parameters = params).getIntArgumentValue(IntTestParam().id))
+    }
+
     open class StringTestParam() : Parameter() {
         override val name: String = "test"
         override val shortName: String = "t"
         override val defaultValue: String = "default"
         override val id: String = name + defaultValue
         override val type: ArgumentTypes = ArgumentTypes.STRING
+    }
+
+    class IntTestParam : Parameter() {
+        override val name: String = "test"
+        override val shortName: String = "t"
+        override val defaultValue: Int = 10
+        override val id: String = name + defaultValue
+        override val type: ArgumentTypes = ArgumentTypes.INT
     }
 }
