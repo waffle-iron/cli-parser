@@ -77,6 +77,7 @@ abstract class Parameter {
  * The possible data types a [parameter's][Parameter] value can have.
  * @author Florian Warzecha
  * @version 1.0
+ * @since 1.0-dev
  * @date 07 of June 2017
  * @see Parameter
  * @see Parameter.type

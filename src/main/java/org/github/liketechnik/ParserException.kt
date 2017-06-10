@@ -28,6 +28,13 @@ package org.github.liketechnik
  * @see Parser
  */
 class ParserException(reason: String) : Exception(reason) {
+    /**
+     * States that the parameters name was found in the arguments but did not match the prefix.
+     * @param argument The part of the [Parser.arguments] that contains the [parameter].
+     * @param parameter The name of the [Parameter] that was matched.
+     * @see Parameter.name
+     * @see Parser
+     */
     constructor(argument: String, parameter: String) : this(
             "Argument '$argument' contains parameter '$parameter but does not have any matching prefix."
     )
