@@ -52,6 +52,6 @@ class ParserTest {
         override val shortName: String = "t"
         override val defaultValue: String = "default"
         override val id: String = name + defaultValue
-        override val type: ArgumentTypes = org.github.liketechnik.ArgumentTypes.STRING
+        override val type: ArgumentTypes = ArgumentTypes.STRING
     }
 }
