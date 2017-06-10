@@ -1,0 +1,90 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Parameter - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">com.github.liketechnik</a>&nbsp;/&nbsp;<a href=".">Parameter</a><br/>
+<br/>
+<h1>Parameter</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Parameter</span></code> <a href="https://github.com/liketechnik/cli-parser/blob/development/src/main/java/com/github/liketechnik/Parameter.kt#L37">(source)</a>
+<p>This class represents a command line parameter.</p>
+<p><a href="name.html">name</a> and <a href="short-name.html">shortName</a> are used to identify the passed arguments and match their values to the correct parameters.
+<a href="default-value.html">defaultValue</a> must have the same type as <a href="type.html">type</a> is stating; it is used when the parameter is not specified on the cli.
+<a href="type.html">type</a> defines which (java/kotlin) data type the value of the parameter should have.
+<a href="id.html">id</a> identifies the parameter amongst others in a parser and must be unique</p>
+<p><strong>Author</strong><br/>
+Florian Warzecha</p>
+<p><strong>Version</strong><br/>
+1.0</p>
+<p><strong>Since</strong><br/>
+1.0-dev</p>
+<p><strong>Date</strong><br/>
+07 of June 2017</p>
+<p><strong>See Also</strong><br/>
+<p><a href="../-parser/index.html">Parser</a></p>
+<p><a href="../-argument-types/index.html">ArgumentTypes</a></p>
+</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-init-.html">&lt;init&gt;</a></td>
+<td>
+<code><span class="identifier">Parameter</span><span class="symbol">(</span><span class="symbol">)</span></code>
+<p>This class represents a command line parameter.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="default-value.html">defaultValue</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">defaultValue</span><span class="symbol">: </span><span class="identifier">Any</span></code>
+<p>When overriding please choose an appropriate type for the default value, in most cases it must be the same as
+specified by <a href="type.html">type</a>. The value of this property is used when the parameter was not found on the cli by the parser
+or it was unable to convert it to the <a href="type.html">type</a> requested.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="id.html">id</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">id</span><span class="symbol">: </span><span class="identifier">String</span></code>
+<p>A unique id for identifying the parameter amongst others.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="name.html">name</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">name</span><span class="symbol">: </span><span class="identifier">String</span></code>
+<p>The long (default) version of the parameter on the cli (e. g. <code>version</code>).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="short-name.html">shortName</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">shortName</span><span class="symbol">: </span><span class="identifier">String</span></code>
+<p>The short (abbreviated) version of the parameter on the cli (e. g. <code>v</code>).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="type.html">type</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">type</span><span class="symbol">: </span><a href="../-argument-types/index.html"><span class="identifier">ArgumentTypes</span></a></code>
+<p>The data type of the parameter's value.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
