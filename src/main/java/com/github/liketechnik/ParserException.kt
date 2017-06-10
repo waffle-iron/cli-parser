@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.github.liketechnik
+package com.github.liketechnik
 
 /**
  * An exception for errors in the parsing process.
