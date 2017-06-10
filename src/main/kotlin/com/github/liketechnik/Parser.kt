@@ -28,7 +28,7 @@ package com.github.liketechnik
  * value's data type (e. g. [getStringArgumentValue] for [Strings][String]).
  *
  * @author Florian Warzecha
- * @version 1.0
+ * @version 1.1
  * @since 1.0-dev
  * @date 07 of June 2017
  * @param arguments The arguments to parse (usually from cli).
@@ -123,7 +123,7 @@ class Parser @JvmOverloads constructor(val arguments: Array<String>, val argumen
             }
             return value
         }
-        return parameter.defaultValue as String
+        return parameter.defaultValue.toString()
     }
 
     /**
@@ -134,7 +134,7 @@ class Parser @JvmOverloads constructor(val arguments: Array<String>, val argumen
      */
     private fun parseIntArgument(parameter: Parameter): Int {
         try {
-            return parseStringArgument(parameter).toInt()
+            return parseStringArgument(parameter).replace(" ", "").toInt()
         } catch (e: NumberFormatException) {
             return parameter.defaultValue as Int
         }
