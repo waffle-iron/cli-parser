@@ -36,10 +36,10 @@ class ParserTest {
         val params: Array<Parameter> = arrayOf(StringTestParam())
 
         val longFormValue = "b=bac"
-        val longFormArgs: Array<String> = arrayOf("--test=$longFormValue", "a", "--test2=c")
+        val longFormArgs: Array<String> = arrayOf("a", "--test2=c", "--test=$longFormValue")
         val shortFormValue1: String = "a"
         val shortFormValue2: String = "b"
-        val shortFormArgs: Array<String> = arrayOf<String>("-t", shortFormValue1, shortFormValue2, "--test3=hallo")
+        val shortFormArgs: Array<String> = arrayOf<String>("--test3=hallo", "-t", shortFormValue1, shortFormValue2)
         assertEquals(Parser(longFormArgs, parameters = params).getStringArgumentValue(StringTestParam().id), longFormValue)
         assertEquals(Parser(shortFormArgs, parameters = params).getStringArgumentValue(StringTestParam().id),
                 shortFormValue1 + " " + shortFormValue2)
@@ -52,10 +52,10 @@ class ParserTest {
         val params: Array<Parameter> = arrayOf(IntTestParam())
 
         val longFormValue: String = "20"
-        val longFormArgs: Array<String> = arrayOf("--test=$longFormValue", "10", "--test2=100")
+        val longFormArgs: Array<String> = arrayOf("10", "--test2=100", "--test=$longFormValue")
         val shortFormValue1: String = "30"
         val shortFormValue2: String = "000"
-        val shortFormArgs: Array<String> = arrayOf<String>("-t", shortFormValue1, shortFormValue2, "--test4=40")
+        val shortFormArgs: Array<String> = arrayOf<String>("--test4=40", "-t", shortFormValue1, shortFormValue2)
 
         assertEquals(longFormValue.toInt(),
                 Parser(longFormArgs, parameters = params).getIntArgumentValue(IntTestParam().id))
