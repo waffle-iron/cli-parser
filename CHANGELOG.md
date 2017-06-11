@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.2-dev](https://github.com/liketechnik/cli-parser/tree/1.2-dev) (2017-06-11)
+[Full Changelog](https://github.com/liketechnik/cli-parser/compare/1.1-dev...1.2-dev)
+
+**Merged pull requests (development branch):**
+
+- allow multiple arguments [\#2](https://github.com/liketechnik/cli-parser/pull/2) ([liketechnik](https://github.com/liketechnik))
+
 ## [1.1-dev](https://github.com/liketechnik/cli-parser/tree/1.1-dev) (2017-06-10)
 [Full Changelog](https://github.com/liketechnik/cli-parser/compare/1.0-dev...1.1-dev)
 
