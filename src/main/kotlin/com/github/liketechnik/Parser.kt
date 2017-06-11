@@ -104,7 +104,7 @@ class Parser @JvmOverloads constructor(val arguments: Array<String>, val argumen
      */
     @Throws(ParserException::class)
     private fun parseStringArgument(parameter: Parameter): String {
-        val value: String
+        var value: String = parameter.defaultValue.toString()
 
         for (i in this.arguments.indices) {
             val argument: String = this.arguments[i]
@@ -118,12 +118,9 @@ class Parser @JvmOverloads constructor(val arguments: Array<String>, val argumen
                         .forEach { tmpVal.append(it)
                                     tmpVal.append(" ")}
                 value = tmpVal.removeRange(tmpVal.lastIndex, tmpVal.lastIndex + 1).toString()
-            } else {
-                throw ParserException(argument, parameter.name)
             }
-            return value
         }
-        return parameter.defaultValue.toString()
+        return value
     }
 
     /**
